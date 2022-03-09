@@ -26,7 +26,7 @@ public class Minesweeper extends AbstractMineSweeper{
         }
         else if (level.equals(Difficulty.MEDIUM))
         {
-            this.startNewGame(7,7,15);
+            this.startNewGame(7,7,8);
         }
         else if (level.equals(Difficulty.HARD))
         {
@@ -145,7 +145,7 @@ public class Minesweeper extends AbstractMineSweeper{
                     {
                         for (int m =y-ymin;m<=y+ymax;m++)
                         {
-                            this.open(m,i);
+                            this.open(i,m);
                         }
                     }
                 }
