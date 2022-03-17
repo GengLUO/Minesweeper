@@ -32,9 +32,9 @@ public class MinesweeperView implements IGameStateNotifier {
     public static final int MAX_TIME = 1;//in minutes
     public static final int TILE_SIZE = 50;
     public static final class AssetPath {
-        public static final String CLOCK_ICON = "";
-        public static final String FLAG_ICON = "settings_icon.png";
-        public static final String BOMB_ICON = "Notes_icon.jpg";
+        public static final String CLOCK_ICON = "clock.png";
+        public static final String FLAG_ICON = "flag.png";
+        public static final String BOMB_ICON = "bomb.png";
     }
     private PlayableMinesweeper gameModel;
     private JFrame window;
@@ -186,7 +186,7 @@ public class MinesweeperView implements IGameStateNotifier {
     @Override
     public void notifyGameWon() {
         this.removeAllTileEvents();
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
     }
 
     private void removeAllTileEvents() {

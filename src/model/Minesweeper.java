@@ -26,7 +26,7 @@ public class Minesweeper extends AbstractMineSweeper{
         }
         else if (level.equals(Difficulty.MEDIUM))
         {
-            this.startNewGame(7,7,8);
+            this.startNewGame(7,7,3);
         }
         else if (level.equals(Difficulty.HARD))
         {
@@ -39,6 +39,7 @@ public class Minesweeper extends AbstractMineSweeper{
         this.h = row;
         this.w = col;
         this.tiles = new AbstractTile[h][w];
+        this.flagCount =0;
         ArrayList<Integer> indexhused = new ArrayList<>();
         ArrayList<Integer> indexwused = new ArrayList<>();
         int indexh,indexw;
@@ -155,10 +156,41 @@ public class Minesweeper extends AbstractMineSweeper{
             else
             {
                 viewNotifier.notifyExploded(x,y);
+                for (int i = 0; i < w; i++) {
+                    for (int j = 0; j < h; j++) {
+                        if (this.tiles[i][j].isExplosive())
+                        {
+                            viewNotifier.notifyExploded(i,j);
+                        }
+                    }
+
+                }
                 viewNotifier.notifyGameLost();
             }
         }
+        boolean win = true;
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
+                if (!tiles[i][j].isExplosive()&&!tiles[i][j].isOpened())
+                {
+                    win = false;
+                }
+            }
+        }
+        if (win == true)
+        {
+            for (int i = 0; i < w; i++) {
+                for (int j = 0; j < h; j++) {
+                    if (tiles[i][j].isExplosive())
+                    {
+                        this.flag(i,j);
+                    }
+                }
+            }
+            viewNotifier.notifyGameWon();
+        }
     }
+
     public void openSurround(int x, int y)
     {
         int xmin = 1,xmax=1,ymin=1,ymax = 1;
@@ -183,6 +215,7 @@ public class Minesweeper extends AbstractMineSweeper{
             viewNotifier.notifyFlagged(x, y);
             this.flagCount++;
         }
+
     }
 
     @Override
